@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Chart, Svg, Axis, Bars, Spline, Area, Points, Highlight, Tooltip, TooltipItem } from 'layerchart';
+	import { Chart, Svg, Axis, Bars, Spline, Area, Points, Highlight, Tooltip } from 'layerchart';
 	import { scaleBand, scaleLinear, scalePoint } from 'd3-scale';
 	import { format } from 'd3-format';
 	import type { ChartType, DataPoint } from '$lib/types';
@@ -46,8 +46,11 @@
 			<Highlight area bar class="fill-transparent" />
 		</Svg>
 
-		<Tooltip header={(data) => data[xKey]} let:data>
-			<TooltipItem label="Value" value={data[yKey]} format=",.2f" />
-		</Tooltip>
+		<Tooltip.Root let:data>
+			<Tooltip.Header value={data[xKey]} />
+			<Tooltip.List>
+				<Tooltip.Item label="Value" value={data[yKey]} format=",.2f" />
+			</Tooltip.List>
+		</Tooltip.Root>
 	</Chart>
 </div>
